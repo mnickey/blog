@@ -88,3 +88,7 @@ def delete_post(post_id):
     session.query(Post).filter(Post.id == post_id).delete(synchronize_session='evaluate')
     session.commit()
     return redirect(url_for("posts"))
+
+@app.route("/login", methods=["GET"])
+def login_get():
+    return render_template("login.html")
