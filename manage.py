@@ -24,9 +24,7 @@ def run():
     app.run(host='0.0.0.0', port=port)
 
 from getpass import getpass
-
 from werkzeug.security import generate_password_hash
-
 from blog.models import User
 
 @manager.command
