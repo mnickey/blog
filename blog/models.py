@@ -12,7 +12,7 @@ class Post(Base):
     title = Column(String(1024))
     content = Column(Text)
     datetime = Column(DateTime, default=datetime.datetime.now)
-    author.id = Column(Integer, ForeignKey('users.id'))
+    author_id = Column(Integer, ForeignKey('users.id'))
 
 from flask.ext.login import UserMixin
 
