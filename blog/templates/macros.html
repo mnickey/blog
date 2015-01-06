@@ -12,14 +12,16 @@
     <div class="col-md-10">
         <h1>
             <!--Reform the URL to be proper-->
-            <a href="/post/{{ post.id }}">{{ post.title }}</a>
+            <a href="/post/{{ post.id }}">{{ post.title }} </a>
         </h1>
+        <div>
+            <p>Created by {{ post.author.name }}</p>
+        </div>
 
         {{ post.content | markdown | safe }}
         <div>
             <a href="/post/{{ post.id }}/edit"> Edit Post</a> ||
             <a href="/post/{{ post.id }}/delete"> Delete Post </a>
-            {{ post.author.name }}
         </div>
     </div>
 </div>

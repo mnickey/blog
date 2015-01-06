@@ -1,5 +1,4 @@
 from flask.ext.login import LoginManager
-
 from blog import app
 from database import session
 from models import User

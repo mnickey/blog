@@ -60,12 +60,14 @@ def view_post(post_id):
     return render_template("posts.html", posts=posts)
 
 @app.route("/post/<int:post_id>/edit", methods=["GET"])
+@login_required
 def edit_post_get(post_id):
     post = session.query(Post)
     post = post.get(post_id)
     return render_template("edit_post.html", post=post)
 
 @app.route("/post/<int:post_id>/edit", methods=["POST"])
+@login_required
 def edit_post_post(post_id):
     post = session.query(Post)
     post = post.get(post_id)
@@ -80,12 +82,14 @@ def edit_post_post(post_id):
     return redirect(url_for("posts"))
 
 @app.route("/post/<int:post_id>/delete", methods=["GET"])
+@login_required
 def delete_get(post_id):
     post = session.query(Post)
     post = post.get(post_id)
     return render_template("delete_post.html", post=post)
 
 @app.route("/post/<int:post_id>/delete", methods=["POST"])
+@login_required
 def delete_post(post_id):
     post = session.query(Post)
     post = post.get(post_id)
@@ -111,4 +115,10 @@ def login_post():
         flash("Incorrect username or password", "danger")
         return redirect(url_for("login_get"))
     login_user(user)
+    return redirect(request.args.get('next') or url_for("posts"))
+
+from flask.ext.login import logout_user
+@app.route("/logout", methods=["GET"])
+def logout_get():
+    logout_user()
     return redirect(request.args.get('next') or url_for("posts"))
