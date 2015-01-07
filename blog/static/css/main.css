@@ -2,3 +2,10 @@ div.metadata {
     margin-top: 20px;
     font-size: 1.5em;
 }
+
+.btn {
+    margin: .5em;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}

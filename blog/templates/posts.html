@@ -1,7 +1,6 @@
 {% import "macros.html" as macros %}
 {% extends "base.html" %}
 {% block content %}
-<a class="btn btn-default" href="/post/{{ 'add' }}">Add New Post</a>
 
 {% for post in posts %}
 {{ macros.render_post(post) }}
