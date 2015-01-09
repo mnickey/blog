@@ -118,3 +118,5 @@ from flask.ext.login import logout_user
 def logout_get():
     logout_user()
     return redirect(request.args.get('next') or url_for("posts"))
+
+# Todo: Add user login route
