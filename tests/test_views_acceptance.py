@@ -23,7 +23,7 @@ class TestViews(unittest.TestCase):
         Base.metadata.create_all(engine)
 
         # Create an example user
-        self.user = models.User(name="Alice", email="alice@example.com",
+        self.user = models.User(name="test", email="test@test.com",
                                 password=generate_password_hash("test"))
         session.add(self.user)
         session.commit()
@@ -41,7 +41,7 @@ class TestViews(unittest.TestCase):
 
     def testLoginCorrect(self):
         self.browser.visit("http://0.0.0.0:8080/login")
-        self.browser.fill("email", "alice@example.com")
+        self.browser.fill("email", "test@test.com")
         self.browser.fill("password", "test")
         button = self.browser.find_by_css("button[type=submit]")
         button.click()
