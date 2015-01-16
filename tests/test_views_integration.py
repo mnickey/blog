@@ -67,11 +67,39 @@ class TestViews(unittest.TestCase):
         posts = session.query(models.Post).all()
         # Make sure the post length is only 1, I only added one post
         self.assertEqual(len(posts), 1)
+        #using prints to make sure i know what I am seeing, that it is actually creating a post.
+        # print posts[0]
+        # print "\nContent is: ", posts[0].content
         # posts = posts.get(models.Post.id)
-        response = self.client.post("/post/" + models.Post.id + "/edit", data={
+        response = self.client.post("/post/" + str(posts[0].id) + "/edit", data={
+            "title": "EDIT Test Post",
+            "content": "EDIT Test content"})
+        self.assertEqual(response.status_code, 302)
+
+# Authored testing for DELETING a post
+    def testDeletePost(self):
+        # Simulate a login
+        self.simulate_login()
+        # Create a post
+        response = self.client.post("/post/add", data={
             "title": "Test Post",
             "content": "Test content"})
+        # make sure that the response code is 302
         self.assertEqual(response.status_code, 302)
+        # Query the post
+        posts = session.query(models.Post).all()
+        # Make sure the post length is only 1, I only added one post
+        self.assertEqual(len(posts), 1)
+        #using prints to make sure i know what I am seeing, that it is actually creating a post.
+        # print posts[0]
+        # print "\nContent is: ", posts[0].content
+        # posts = posts.get(models.Post.id)
+        response = self.client.post("/post/" + str(posts[0].id) + "/delete", data={
+            "title": "",
+            "content": ""})
+        posts = session.query(models.Post).all()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(len(posts), 0)
 
 if __name__ == "__main__":
     unittest.main()
